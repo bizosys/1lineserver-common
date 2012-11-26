@@ -138,7 +138,7 @@ public class UserCookieHandler
     
 	private String buildBrowserKey(HttpServletRequest request, UserProfile user) {
 		StringBuilder sb = new StringBuilder(100);
-		sb.append(user.id).append(':').append(user.loginid).append(':').append(request.getRemoteAddr());
+		sb.append(user.getProfile()).append(':').append(user.loginid).append(':').append(request.getRemoteAddr());
 		return sb.toString();
 	}
 
@@ -193,7 +193,7 @@ public class UserCookieHandler
 				}
 				else if (COOKIE_USERID.equals(cookie.getName()))
 				{
-					user.id = this.decodeCookieValue(cookie);
+					user.setProfile(this.decodeCookieValue(cookie));
 				}
 				else if (COOKIE_HEXDIGEST.equals(cookie.getName()))
 				{
@@ -221,14 +221,14 @@ public class UserCookieHandler
 	private void storeInCookie(UserProfile user, HttpServletResponse response)
 	{
 		this.addCookie(COOKIE_LOGINID, user.loginid, response, this.credentialsExpireInSeconds);
-		this.addCookie(COOKIE_USERID, user.id, response, this.credentialsExpireInSeconds);
+		this.addCookie(COOKIE_USERID, user.getProfile(), response, this.credentialsExpireInSeconds);
 		this.addCookie(COOKIE_HEXDIGEST, user.hexdigest, response, this.credentialsExpireInSeconds);
 	}
 
 	private void removeCookies(UserProfile user, HttpServletResponse response)
 	{
 		this.addCookie(COOKIE_LOGINID, user.loginid, response, 1);
-		this.addCookie(COOKIE_USERID, user.id, response, 1);
+		this.addCookie(COOKIE_USERID, user.getProfile(), response, 1);
 		this.addCookie(COOKIE_HEXDIGEST, user.hexdigest, response, 1);
 	}
 

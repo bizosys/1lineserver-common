@@ -14,9 +14,6 @@
 		<fileset dir="${lib.dir}">
 			<include name="*.jar" />
 		</fileset>
-		<fileset dir="${buildlib.dir}">
-			<include name="*.jar" />
-		</fileset>
 	</path>
 
 	<!-- ====================================================== -->

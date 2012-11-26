@@ -161,6 +161,9 @@ public abstract class AbstractOnelineServlet extends HttpServlet {
 		if ( StringUtils.isEmpty(format)) {
 			res.setContentType("text/html");
 			sensorRes.format = StringUtils.Empty;
+		} else if ( "csv".equals(format) ){
+			res.setContentType("application/CSV");
+			sensorRes.format = "csv";
 		} else {
 			res.setContentType("text/xml");
 			sensorRes.format = format;

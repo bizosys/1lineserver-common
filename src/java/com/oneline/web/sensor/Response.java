@@ -33,8 +33,15 @@ public class Response {
 
 	private PrintWriter out = null;
     public String callback = StringUtils.Empty;
-    public String format = StringUtils.Empty; //JSONP, XML, XSL
-	int formatIndex = 0; // 0 = XML, 1 = JSONP, 2 = XSL
+    public String format = StringUtils.Empty; //JSONP, XML, XSL, CSV
+
+	static final int FORMAT_TEXT_OR_HTML = -1;
+	static final int FORMAT_XML = 0;
+	static final int FORMAT_JSONP = 1;
+	static final int FORMAT_XSL = 2;
+	static final int FORMAT_CSV = 3;
+    int formatIndex = FORMAT_TEXT_OR_HTML;
+	
     public Object data = null;
     private String errorMessage = null;
     private String errorCode = null;
@@ -168,14 +175,15 @@ public class Response {
      */
     public void writeHeader() {
     	StringBuilder sb = new StringBuilder(100);
+
     	if ( ! StringUtils.isEmpty(format) ) {
-    		if ( format.length() == 5 ) formatIndex = 1; //JSONP
-    		else if ( format.charAt(1) == 'S')  formatIndex = 2; //XSL
-    		//Unknown are XMLs.
+    		if ( format.length() == 5 ) formatIndex = FORMAT_JSONP;
+    		else if ( format.equals("xml") )  formatIndex = FORMAT_XML;
+    		else formatIndex = FORMAT_XSL;
     	}
     	
     	switch ( formatIndex ) {
-    		case 0:
+    		case FORMAT_XML:
     		   	if ( StringUtils.isEmpty(this.callback) ) {
     	    		sb.append("<result>");
     	    	} else {
@@ -183,17 +191,20 @@ public class Response {
     	    	}
     		   	break;
     		
-    		case 1:
+    		case FORMAT_JSONP:
     		   	if ( ! StringUtils.isEmpty(this.callback) )
     		   		sb.append(this.callback).append('(');
     		   	break;
     		
-    		case 2:
+    		case FORMAT_XSL:
         		sb.append("<?xml version=\"1.0\" ?>");
         		sb.append("<?xml-stylesheet type=\"text/xsl\" href=\"");
         		sb.append(this.callback); //This is the XSL file name
         		sb.append("\" ?>");
         		sb.append("<result>");
+    		   	break;
+    		
+    		default: //HTML and CSV formats.
     		   	break;
     	}
     	
@@ -206,17 +217,20 @@ public class Response {
      */
     public void writeFooter() {
     	switch ( formatIndex ) {
-			case 0: //XML
+			case FORMAT_XML:
 		    	out.print("</result>");
 			   	break;
 			
-			case 1: //JSONP
+			case FORMAT_JSONP:
 			   	if ( ! StringUtils.isEmpty(this.callback) ) out.print(");");
 			   	break;
 			   	
-			case 2: //XSL
+			case FORMAT_XSL:
 		    	out.print("</result>");
 			   	break;
+
+			default: //HTML and CSV formats.
+    		   	break;
 	    }
     }
 }

@@ -41,8 +41,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-import com.bizosys.onelineserver.service.IConfiguration;
 import com.bizosys.onelineserver.service.ServiceFactory;
+import com.oneline.util.Configuration;
 import com.oneline.util.Hash;
 import com.oneline.util.StringUtils;
 
@@ -62,7 +62,7 @@ public class CaptchaServlet extends HttpServlet {
 	
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);   
-    	IConfiguration conf = ServiceFactory.getInstance().getAppConfig();
+    	Configuration conf = ServiceFactory.getInstance().getAppConfig();
 		this.key = conf.get(Hash.KEY_NAME,Hash.KEY_VALUE_DEFAULT);
 		this.subDomain = conf.get("subdomain", "");
 	}  

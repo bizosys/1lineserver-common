@@ -20,10 +20,12 @@
 
 package com.bizosys.onelineserver.service;
 
+import com.oneline.util.Configuration;
+
 
 public class BaseService implements IService {
 
-   protected IConfiguration conf;
+   protected Configuration conf;
    protected int workingLvl = IService.LVL_OPTIMAL;
 
 	/**
@@ -36,7 +38,7 @@ public class BaseService implements IService {
 	/**
 	 * Call this
 	 */
-	public boolean serviceStart(IConfiguration conf) {
+	public boolean serviceStart(Configuration conf) {
 		this.conf = conf;
 		return true;
 	}

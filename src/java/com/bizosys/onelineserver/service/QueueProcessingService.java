@@ -26,6 +26,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.log4j.Logger;
 
+import com.oneline.util.Configuration;
+
 /**
  * @author karan
  */
@@ -93,7 +95,7 @@ public class QueueProcessingService extends BaseService implements Runnable {
 	}
 
 	@Override
-	public boolean serviceStart(IConfiguration conf) 
+	public boolean serviceStart(Configuration conf) 
 	{
 		super.serviceStart(conf);
 		QueueProcessingService.getInstance();

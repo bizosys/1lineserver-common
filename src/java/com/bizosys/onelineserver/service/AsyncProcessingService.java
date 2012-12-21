@@ -25,6 +25,7 @@ import java.util.concurrent.*;
 import org.apache.log4j.Logger;
 
 import com.oneline.SystemFault;
+import com.oneline.util.Configuration;
 
 public class AsyncProcessingService extends BaseService {
 
@@ -86,7 +87,7 @@ public class AsyncProcessingService extends BaseService {
     
     
 	@Override
-	public boolean serviceStart(IConfiguration conf) 
+	public boolean serviceStart(Configuration conf) 
 	{
 		super.serviceStart(conf);
 		this.poolSize = super.conf.getInt("async.workers.init",5);

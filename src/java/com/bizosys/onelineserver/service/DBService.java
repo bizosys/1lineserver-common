@@ -23,6 +23,7 @@ package com.bizosys.onelineserver.service;
 import org.apache.log4j.Logger;
 
 import com.oneline.dao.PoolFactory;
+import com.oneline.util.Configuration;
 import com.oneline.util.FileReaderUtil;
 
 public class DBService extends BaseService
@@ -35,7 +36,7 @@ public class DBService extends BaseService
 	}
 
 	@Override
-	public boolean serviceStart(IConfiguration conf) 
+	public boolean serviceStart(Configuration conf) 
 	{
 		super.serviceStart(conf);
 		try

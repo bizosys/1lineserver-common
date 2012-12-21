@@ -26,13 +26,14 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.bizosys.onelineserver.service.scheduler.SchedulerService;
+import com.oneline.util.Configuration;
 import com.oneline.util.StringUtils;
 
 public class ServiceFactory extends BaseService {
 
 	private static Logger LOG = Logger.getLogger(ServiceFactory.class);
 	private static ServiceFactory thisInstance = new ServiceFactory();
-	public IConfiguration conf = null;
+	public Configuration conf = null;
 
 	private Map<String, IService> services = new HashMap<String, IService>(8); 
 
@@ -49,7 +50,7 @@ public class ServiceFactory extends BaseService {
 		return ServiceFactory.thisInstance;
 	}
 	
-	public boolean serviceStart(IConfiguration conf) {
+	public boolean serviceStart(Configuration conf) {
 		
 		this.conf = conf;
 		String[] startL = this.conf.getStrings("services.to.start");
@@ -133,7 +134,7 @@ public class ServiceFactory extends BaseService {
 		
 	}
 
-	public IConfiguration getAppConfig() {
+	public Configuration getAppConfig() {
 		return this.conf;
 	}
 	

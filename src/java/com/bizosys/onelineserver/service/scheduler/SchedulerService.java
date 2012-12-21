@@ -27,7 +27,7 @@ import java.util.Timer;
 import org.apache.log4j.Logger;
 
 import com.bizosys.onelineserver.service.BaseService;
-import com.bizosys.onelineserver.service.IConfiguration;
+import com.oneline.util.Configuration;
 
 public class SchedulerService extends BaseService implements ISchedulerService {
 
@@ -51,7 +51,7 @@ public class SchedulerService extends BaseService implements ISchedulerService {
 	}
 
 	@Override
-	public boolean serviceStart(IConfiguration conf) {
+	public boolean serviceStart(Configuration conf) {
 		LOG.info("Starting scheduler service");
 		super.serviceStart(conf);
 		timer = new Timer(true);

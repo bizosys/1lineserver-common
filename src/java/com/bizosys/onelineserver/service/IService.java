@@ -22,6 +22,8 @@ package com.bizosys.onelineserver.service;
 
 import org.apache.log4j.Logger;
 
+import com.oneline.util.Configuration;
+
 
 public interface IService {
 	static Logger LOG = Logger.getLogger(IService.class.getName());
@@ -30,7 +32,7 @@ public interface IService {
 	static int LVL_OPTIMAL = 0;
 	static int LVL_DANGER = 1;
 	
-	boolean serviceStart(IConfiguration conf);
+	boolean serviceStart(Configuration conf);
 	boolean delayedStart();
 	boolean serviceStop();
 	boolean serviceSuspend();

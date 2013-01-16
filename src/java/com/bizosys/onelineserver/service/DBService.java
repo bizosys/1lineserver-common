@@ -42,8 +42,11 @@ public class DBService extends BaseService
 		try
 		{
 			String dbConfFilename = conf.get("db.conf", "db.conf");
-			String configXml = FileReaderUtil.toString(dbConfFilename);
-			PoolFactory.getInstance().setup(configXml);
+			boolean isGAE = conf.getBoolean("GAE", false);
+			if(isGAE)
+				PoolFactory.getInstance().setup(FileReaderUtil.toStringOnGae(dbConfFilename));
+			else
+				PoolFactory.getInstance().setup(FileReaderUtil.toString(dbConfFilename));
 		}
 		catch (Exception e)
 		{

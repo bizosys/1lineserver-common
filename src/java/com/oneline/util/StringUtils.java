@@ -148,9 +148,13 @@ public class StringUtils {
 	  }
 	  
 	  public static List<String> fastSplit(final String text, char separator) {
+		  return fastSplit (null, text, separator);
+	  }
+	  
+	  public static List<String> fastSplit(List<String> result , final String text, char separator) {
 		  if (isEmpty(text)) return null;
 
-		  final List<String> result = new ArrayList<String>();
+		  if ( null == result) result = new ArrayList<String>();
 		  int index1 = 0;
 		  int index2 = text.indexOf(separator);
 
@@ -173,7 +177,7 @@ public class StringUtils {
 		  }
 		  
 		  return result;
-	  }
+	  }	  
 	  
 	  public static String firstTokens(final String text, char separator, int tokens) {
 		  if (isEmpty(text)) return null;

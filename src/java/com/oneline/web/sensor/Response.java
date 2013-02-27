@@ -102,7 +102,8 @@ public class Response {
      */
     public void writeObjectWithHeaderAndFooter(Object aObject) {
     	writeHeader();
-    	String body =  ( formatIndex == 1 ) ? XmlUtils.xstream.toXML(aObject) : XmlUtils.jstream.toXML(aObject);
+    	String body =  ( formatIndex == FORMAT_XML ) ? 
+    			XmlUtils.xstream.toXML(aObject) : XmlUtils.jstream.toXML(aObject);
     	out.println(body);
     	writeFooter();
     	
@@ -114,7 +115,8 @@ public class Response {
     	if ( null != serializeL ){ 
 	    	int serializeT = serializeL.size();
 	    	for ( int i=0; i<serializeT; i++ ) {
-	        	String body =  ( formatIndex == 1 ) ? XmlUtils.xstream.toXML(serializeL.get(i)) : XmlUtils.jstream.toXML(serializeL.get(i));
+	        	String body =  ( formatIndex == FORMAT_XML ) ? 
+	        			XmlUtils.xstream.toXML(serializeL.get(i)) : XmlUtils.jstream.toXML(serializeL.get(i));
 				out.println(body);
 	        	if ( DEBUG_ENABLED) LOG.debug("\n" + body + "\n");
 	    	}

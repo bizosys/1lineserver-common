@@ -172,7 +172,10 @@ public class Request {
 	 * @throws InvalidRequestException
 	 */
 	public Object getObject (String key, boolean strict, Class classToFill) throws InvalidRequestException {
-		String value = this.getString(key,strict, true, false);
+		boolean emptyAllowed = true;
+		if (strict) emptyAllowed = false;
+		
+		String value = this.getString(key,strict, true, emptyAllowed);
 		if ( null == value ) return null;
 		if (classToFill == null) return value;
 		

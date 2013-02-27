@@ -153,17 +153,25 @@ public class StringUtils {
 		  final List<String> result = new ArrayList<String>();
 		  int index1 = 0;
 		  int index2 = text.indexOf(separator);
-		  String token = null;
-		  while (index2 >= 0) {
-			  token = text.substring(index1, index2);
-			  result.add(token);
-			  index1 = index2 + 1;
-			  index2 = text.indexOf(separator, index1);
+
+		  if ( index2 >= 0 ) {
+			  String token = null;
+			  while (index2 >= 0) {
+				  token = text.substring(index1, index2);
+				  result.add(token);
+				  index1 = index2 + 1;
+				  index2 = text.indexOf(separator, index1);
+				  if ( index2 < 0 ) index1--;
+			  }
+		            
+			  if (index1 < text.length() - 1) {
+				  result.add(text.substring(index1+1));
+			  }
+			  
+		  } else {
+			  result.add(text);
 		  }
-	            
-		  if (index1 < text.length() - 1) {
-			  result.add(text.substring(index1));
-		  }
+		  
 		  return result;
 	  }
 	  

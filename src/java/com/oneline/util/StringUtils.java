@@ -179,7 +179,7 @@ public class StringUtils {
 		  return result;
 	  }	  
 	  
-	  public static void fastSplit( final String[] result, final int[] positions, 
+	  public static final void fastSplit( final String[] result, final int[] positions, 
 		final String text, final char separator) {
 		  
 		if (text == null) return;
